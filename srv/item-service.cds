@@ -1,4 +1,6 @@
 using { cap.pass as capPass } from '../db/schema';
-service AdminService @(_requires:'authenticated-user') {
-  entity Items as projection on capPass.Items;
+
+@path : '/passItems'
+service ItemsService {
+  entity passItems as projection on capPass.PassItems;
 }

@@ -1,6 +1,6 @@
 namespace cap.pass;
 
-entity Items
+entity PassItems
 {
     key ID : UUID @Core.Computed;
     description : String;

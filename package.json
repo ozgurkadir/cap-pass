@@ -1,13 +1,25 @@
 {
   "name": "cap-pass",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
+  "description": "CAP-PASS PAssword Management App",
+  "repository": "https://github.com/ozgurkadir/cap-pass.git",
+  "license": "MIT License",
   "private": true,
   "dependencies": {
+    "@graphql-tools/schema": "^8.3.1",
+    "@sap/audit-logging": "^5.1.0",
     "@sap/cds": "^5",
-    "express": "^4"
+    "@sap/cds-odata-v2-adapter-proxy": "^1.7.15",
+    "@sap/hana-client": "^2.10.15",
+    "@sap/xsenv": "^3.1.1",
+    "@sap/xssec": "^3.2.10",
+    "dayjs": "^1.10.7",
+    "express": "^4",
+    "express-graphql": "^0.12.0",
+    "graphql": "^16.0.1",
+    "helmet": "^4.6.0",
+    "passport": "^0.5.0",
+    "passport-oauth2": "^1.6.1"
   },
   "devDependencies": {
     "sqlite3": "^5.0.2"
@@ -15,29 +27,18 @@
   "scripts": {
     "start": "cds run"
   },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-      "es2020": true,
-      "node": true,
-      "jest": true,
-      "mocha": true
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "credentials": {
+          "database": "db/cap-pass.db"
+        }
+      }
     },
-    "globals": {
-      "SELECT": true,
-      "INSERT": true,
-      "UPDATE": true,
-      "DELETE": true,
-      "CREATE": true,
-      "DROP": true,
-      "CDL": true,
-      "CQL": true,
-      "CXL": true,
-      "cds": true
-    },
-    "rules": {
-      "no-console": "off",
-      "require-atomic-updates": "off"
+    "features": {
+      "fiori_preview": true,
+      "with_mocks": true
     }
   }
 }
