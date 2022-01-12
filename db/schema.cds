@@ -1,8 +1,12 @@
 namespace cap.pass;
 
-entity PassItems
+using {
+    managed,
+    cuid
+} from '@sap/cds/common';
+
+entity PassItems  : managed, cuid
 {
-    key ID : UUID @Core.Computed;
     description : String;
     password : LargeBinary;
     username : String;
