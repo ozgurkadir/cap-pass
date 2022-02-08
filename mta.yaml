@@ -22,11 +22,14 @@ modules:
  # ------------------------------------------------------------
    type: nodejs
    path: gen/srv
+   build-parameters:
+     ignore: ["package-lock.json", "node_modules/"]   
    parameters:
      buildpack: nodejs_buildpack
    requires:
     # Resources extracted from CAP configuration
     - name: cap-pass-db
+    - name: cap-pass-uaa
    provides:
     - name: srv-api      # required by consumers of CAP services (e.g. approuter)
       properties:
@@ -36,7 +39,9 @@ modules:
  - name: cap-pass-db-deployer
  # ------------------------------------------------------------
    type: hdb
-   path: gen/db  
+   path: gen/db
+   build-parameters:
+     ignore: ["package-lock.json", "node_modules/"]       
    parameters:
      buildpack: nodejs_buildpack
    requires:
@@ -57,4 +62,19 @@ resources:
    properties:
      hdi-service-name: ${service-name}
 
+# ------------------------------------------------------------
+ - name: cap-pass-uaa
+# ------------------------------------------------------------
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service: xsuaa
+     service-plan: application  
+     config:
+       xsappname: cap-pass-${space}    #  name + space dependency
+       tenant-mode: dedicated
+       ##  path to xs-security.json to add roles and scopes
+     path: ./xs-security.json
+       ## or inline definition
+       # scopes:
+       # - name: $XSAPPNAME...
 

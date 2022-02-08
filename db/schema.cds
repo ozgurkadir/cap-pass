@@ -8,7 +8,7 @@ using {
 entity PassItems  : managed, cuid
 {
     description : String;
-    password : LargeBinary;
+    password : Binary;
     username : String;
     uri : String;
     note: String;
